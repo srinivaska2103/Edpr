@@ -18,6 +18,14 @@
             }
         }
     </script>
+      <script>
+    // 1. Check local storage or system preference
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+</script>
     
     <style>
         [dir="rtl"] { direction: rtl; text-align: right; }
@@ -30,7 +38,7 @@
 </head>
 <body class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300">
 
- <nav class="fixed w-full z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800 transition-colors">
+  <nav class="fixed w-full z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800 transition-colors">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-20 items-center">
 <!-- Logo Section -->
@@ -64,24 +72,7 @@
         </div>
     </div>
 </div>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        // Get the current page filename (e.g., "index.html")
-        const currentPath = window.location.pathname.split("/").pop();
-        
-        // Select all links inside our nav container
-        const navLinks = document.querySelectorAll('#navLinks .nav-link');
 
-        navLinks.forEach(link => {
-            const href = link.getAttribute('href');
-            
-            // Check if the current URL matches the link's href
-            if (href === currentPath) {
-                link.classList.add('text-primary', 'font-bold');
-            }
-        });
-    });
-</script>
     <!-- Controls & CTAs -->
   <div class="flex items-center gap-3 ml-4">
     <!-- Theme Toggle (Fixed width/height) -->
@@ -156,13 +147,38 @@
         <a href="abouts.html" class="nav-link block py-2">About</a>
         <a href="services.html" class="nav-link block py-2">Services</a>
         <a href="contact.html" class="nav-link block py-2">Contact</a>
-        <a href="user.html" class="nav-link block py-2">User Profile</a>
     </div>
 
     <!-- Dashboard Button -->
-    <button id="mobDashBtn" class="w-full text-left font-bold py-2 flex justify-between items-center border-t border-slate-200 dark:border-slate-700">
-        Dashboard <span>▾</span>
+     <!-- Dropdown Wrapper -->
+<div class="relative">
+    <!-- Trigger Button -->
+    <button id="mobDashBtn" class="w-full text-left font-bold py-4 flex justify-between items-center border-t border-slate-200 dark:border-slate-700 transition-colors">
+        Dashboard <span id="arrow" class="transition-transform duration-300">▾</span>
     </button>
+
+    <!-- Dropdown Content -->
+    <div id="mobDashDropdown" class="hidden flex flex-col pb-4 space-y-2 pl-4 border-b border-slate-200 dark:border-slate-700">
+        
+       
+
+        <!-- Links -->
+        <a href="user.html" class="py-2 px-2 hover:text-primary transition-colors text-sm">User</a>
+       
+    </div>
+</div>
+
+<script>
+    const btn = document.getElementById('mobDashBtn');
+    const dropdown = document.getElementById('mobDashDropdown');
+    const arrow = document.getElementById('arrow');
+
+    btn.addEventListener('click', () => {
+        dropdown.classList.toggle('hidden');
+        arrow.style.transform = dropdown.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+    });
+</script>
+   
 
     <!-- Toggles (Aligned) -->
     <div class="flex items-center gap-3">
@@ -445,39 +461,43 @@
             </p>
         </div>
 
-        <!-- Expertise Grid -->
-       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-    <div class="group relative bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-        <div class="h-64 overflow-hidden">
-            <img src="assets/team1" alt="Technician" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-        </div>
-        <div class="p-8">
-            <h3 class="text-2xl font-semibold text-slate-900 dark:text-white mb-2">Team Lead</h3>
-            <p class="text-primary font-semibold mb-4 uppercase text-sm tracking-widest">Master Technician</p>
-            <p class="text-slate-600 dark:text-slate-400 font-normal">Expert in complex crease removal and aluminium panel restoration with 10+ years of experience.</p>
-        </div>
-    </div>
-
-    <div class="group relative bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-        <div class="h-64 overflow-hidden">
-            <img src="assets/team2" alt="Technician" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-        </div>
-        <div class="p-8">
-            <h3 class="text-2xl font-semibold text-slate-900 dark:text-white mb-2">Team Member</h3>
-            <p class="text-primary font-semibold mb-4 uppercase text-sm tracking-widest">PDR Specialist</p>
-            <p class="text-slate-600 dark:text-slate-400 font-normal">Specializes in high-volume hail damage repair and precision paint-safe door ding removal showroom.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    
+    <div class="group relative overflow-hidden rounded-3xl bg-slate-900 aspect-[3/4]">
+        <img src="assets/team1" alt="Technician" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+        
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90"></div>
+        
+        <div class="absolute bottom-0 left-0 p-8 w-full text-white">
+            <h3 class="text-2xl font-bold mb-1">James Wilson</h3>
+            <p class="text-primary font-medium uppercase tracking-widest text-xs mb-4">Master Technician</p>
+            <p class="text-slate-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                10+ years of expertise in complex aluminium restoration.
+            </p>
         </div>
     </div>
 
-    <div class="group relative bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 md:col-span-2 lg:col-span-1 flex flex-col md:flex-row lg:flex-col items-center">
-        <div class="h-64 md:h-full lg:h-64 w-full md:w-1/2 lg:w-full overflow-hidden flex-shrink-0">
-            <img src="assets/team3" alt="Technician" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+    <div class="group relative overflow-hidden rounded-3xl bg-slate-900 aspect-[3/4]">
+        <img src="assets/team2" alt="Technician" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90"></div>
+        <div class="absolute bottom-0 left-0 p-8 w-full text-white">
+            <h3 class="text-2xl font-bold mb-1">Sarah Jenkins</h3>
+            <p class="text-primary font-medium uppercase tracking-widest text-xs mb-4">PDR Specialist</p>
+            <p class="text-slate-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Precision expert in high-volume hail and door-ding repair.
+            </p>
         </div>
-        <div class="p-8 w-full">
-            <h3 class="text-2xl font-semibold text-slate-900 dark:text-white mb-2">Team Member</h3>
-            <p class="text-primary font-semibold mb-4 uppercase text-sm tracking-widest">Repair Technician</p>
-            <p class="text-slate-600 dark:text-slate-400 font-normal">Dedicated to quality assurance and final inspection, ensuring every vehicle meets our showroom standards.</p>
+    </div>
+
+    <div class="group relative overflow-hidden rounded-3xl bg-slate-900 aspect-[3/4] md:col-span-2 lg:col-span-1">
+        <img src="assets/team3" alt="Technician" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90"></div>
+        <div class="absolute bottom-0 left-0 p-8 w-full text-white">
+            <h3 class="text-2xl font-bold mb-1">Marcus Thorne</h3>
+            <p class="text-primary font-medium uppercase tracking-widest text-xs mb-4">Repair Technician</p>
+            <p class="text-slate-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Ensuring every vehicle meets our showroom-quality standards.
+            </p>
         </div>
     </div>
 

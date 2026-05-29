@@ -19,7 +19,14 @@
             }
         }
     </script>
-    
+      <script>
+    // 1. Check local storage or system preference
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+</script>
     <style>
         [dir="rtl"] { direction: rtl; text-align: right; }
         /* Active state style */
@@ -65,24 +72,7 @@
         </div>
     </div>
 </div>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        // Get the current page filename (e.g., "index.html")
-        const currentPath = window.location.pathname.split("/").pop();
-        
-        // Select all links inside our nav container
-        const navLinks = document.querySelectorAll('#navLinks .nav-link');
 
-        navLinks.forEach(link => {
-            const href = link.getAttribute('href');
-            
-            // Check if the current URL matches the link's href
-            if (href === currentPath) {
-                link.classList.add('text-primary', 'font-bold');
-            }
-        });
-    });
-</script>
     <!-- Controls & CTAs -->
   <div class="flex items-center gap-3 ml-4">
     <!-- Theme Toggle (Fixed width/height) -->
@@ -157,13 +147,38 @@
         <a href="abouts.html" class="nav-link block py-2">About</a>
         <a href="services.html" class="nav-link block py-2">Services</a>
         <a href="contact.html" class="nav-link block py-2">Contact</a>
-        <a href="user.html" class="nav-link block py-2">User Profile</a>
     </div>
 
     <!-- Dashboard Button -->
-    <button id="mobDashBtn" class="w-full text-left font-bold py-2 flex justify-between items-center border-t border-slate-200 dark:border-slate-700">
-        Dashboard <span>▾</span>
+     <!-- Dropdown Wrapper -->
+<div class="relative">
+    <!-- Trigger Button -->
+    <button id="mobDashBtn" class="w-full text-left font-bold py-4 flex justify-between items-center border-t border-slate-200 dark:border-slate-700 transition-colors">
+        Dashboard <span id="arrow" class="transition-transform duration-300">▾</span>
     </button>
+
+    <!-- Dropdown Content -->
+    <div id="mobDashDropdown" class="hidden flex flex-col pb-4 space-y-2 pl-4 border-b border-slate-200 dark:border-slate-700">
+        
+       
+
+        <!-- Links -->
+        <a href="user.html" class="py-2 px-2 hover:text-primary transition-colors text-sm">User</a>
+       
+    </div>
+</div>
+
+<script>
+    const btn = document.getElementById('mobDashBtn');
+    const dropdown = document.getElementById('mobDashDropdown');
+    const arrow = document.getElementById('arrow');
+
+    btn.addEventListener('click', () => {
+        dropdown.classList.toggle('hidden');
+        arrow.style.transform = dropdown.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+    });
+</script>
+   
 
     <!-- Toggles (Aligned) -->
     <div class="flex items-center gap-3">
@@ -489,50 +504,52 @@
         </div>
 
         <!-- Pricing Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
             
             <!-- Plan 1: Starter -->
-            <div class="p-8 rounded-3xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:border-primary transition-all duration-300">
+            <div class="p-8 rounded-3xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:border-primary transition-all duration-300 flex flex-col h-full">
                 <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">Starter</h3>
                 <div class="text-4xl font-bold text-slate-900 dark:text-white mb-6">$29<span class="text-base font-normal text-slate-500">/mo</span></div>
-                <ul class="space-y-4 mb-8 text-slate-600 dark:text-slate-400 font-normal">
+                <ul class="space-y-4 mb-8 text-slate-600 dark:text-slate-400 font-normal flex-grow">
                     <li>✓ 5 Active Projects</li>
                     <li>✓ Basic Analytics</li>
                     <li>✓ Email Support</li>
+                    <li>✓ Unlimited Projects</li>
                 </ul>
-                <button class="w-full py-3 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-all">Get Started</button>
+                <button class="w-full py-3 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-all mt-auto">Get Started</button>
             </div>
 
             <!-- Plan 2: Pro (Featured) -->
-            <div class="p-8 rounded-3xl border-2 border-primary bg-white dark:bg-slate-900 shadow-xl relative scale-105">
+            <div class="p-8 rounded-3xl border-2 border-primary bg-white dark:bg-slate-900 shadow-xl relative flex flex-col h-full">
                 <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white px-4 py-1 rounded-full text-xs font-bold uppercase">Popular</span>
                 <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">Professional</h3>
                 <div class="text-4xl font-bold text-slate-900 dark:text-white mb-6">$79<span class="text-base font-normal text-slate-500">/mo</span></div>
-                <ul class="space-y-4 mb-8 text-slate-600 dark:text-slate-400 font-normal">
+                <ul class="space-y-4 mb-8 text-slate-600 dark:text-slate-400 font-normal flex-grow">
                     <li>✓ Unlimited Projects</li>
                     <li>✓ Advanced Analytics</li>
                     <li>✓ 24/7 Priority Support</li>
                     <li>✓ Custom Integrations</li>
                 </ul>
-                <button class="w-full py-3 rounded-full bg-primary text-white font-semibold hover:bg-sky-600 transition-all">Get Started</button>
+                <button class="w-full py-3 rounded-full bg-primary text-white font-semibold hover:bg-sky-600 transition-all mt-auto">Get Started</button>
             </div>
 
             <!-- Plan 3: Enterprise -->
-            <div class="p-8 rounded-3xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:border-primary transition-all duration-300">
+            <div class="p-8 rounded-3xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:border-primary transition-all duration-300 flex flex-col h-full">
                 <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">Enterprise</h3>
                 <div class="text-4xl font-bold text-slate-900 dark:text-white mb-6">$199<span class="text-base font-normal text-slate-500">/mo</span></div>
-                <ul class="space-y-4 mb-8 text-slate-600 dark:text-slate-400 font-normal">
+                <ul class="space-y-4 mb-8 text-slate-600 dark:text-slate-400 font-normal flex-grow">
                     <li>✓ Everything in Pro</li>
                     <li>✓ Dedicated Manager</li>
                     <li>✓ Custom Security</li>
                     <li>✓ API Access</li>
                 </ul>
-                <button class="w-full py-3 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-all">Contact Sales</button>
+                <button class="w-full py-3 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-all mt-auto">Contact Sales</button>
             </div>
 
         </div>
     </div>
 </section>
+<!-- SaaS Testimonials Section -->
 <section class="py-20 bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-6">
         
@@ -546,48 +563,41 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     
     <!-- Card 1 -->
-    <div class="group bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-2xl hover:border-primary transition-all duration-300">
-        <div class="w-16 h-16 rounded-full overflow-hidden mb-6 border-2 border-primary/20">
+    <div class="group bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-2xl hover:border-primary transition-all duration-300 flex flex-col">
+        <div class="w-16 h-16 rounded-full overflow-hidden mb-6 border-2 border-primary/20 flex-shrink-0">
             <img src="assets/t1" alt="User" class="w-full h-full object-cover">
         </div>
-        <p class="text-slate-600 dark:text-slate-400 font-normal leading-relaxed mb-6 italic">"This platform has completely transformed our workflow. The automation features are absolute game-changers for our team."</p>
-        <div class="border-t border-slate-100 dark:border-slate-800 pt-6">
+        <p class="text-slate-600 dark:text-slate-400 font-normal leading-relaxed mb-6 italic flex-grow">"This platform has completely transformed our workflow. The automation features are absolute game-changers for our team."</p>
+        <div class="border-t border-slate-100 dark:border-slate-800 pt-6 mt-auto">
             <h4 class="font-semibold text-slate-900 dark:text-white">James Wilson</h4>
             <p class="text-primary text-sm font-medium">CTO, TechFlow</p>
         </div>
     </div>
 
     <!-- Card 2 -->
-    <div class="group bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-2xl hover:border-primary transition-all duration-300">
-        <div class="w-16 h-16 rounded-full overflow-hidden mb-6 border-2 border-primary/20">
+    <div class="group bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-2xl hover:border-primary transition-all duration-300 flex flex-col">
+        <div class="w-16 h-16 rounded-full overflow-hidden mb-6 border-2 border-primary/20 flex-shrink-0">
             <img src="assets/t2" alt="User" class="w-full h-full object-cover">
         </div>
-        <p class="text-slate-600 dark:text-slate-400 font-normal leading-relaxed mb-6 italic">"The integration capabilities are seamless. We were able to scale our operations by 300% in just two months."</p>
-        <div class="border-t border-slate-100 dark:border-slate-800 pt-6">
+        <p class="text-slate-600 dark:text-slate-400 font-normal leading-relaxed mb-6 italic flex-grow">"The integration capabilities are seamless. We were able to scale our operations by 300% in just two months."</p>
+        <div class="border-t border-slate-100 dark:border-slate-800 pt-6 mt-auto">
             <h4 class="font-semibold text-slate-900 dark:text-white">Sarah Jenkins</h4>
             <p class="text-primary text-sm font-medium">Head of Ops, Innovate</p>
         </div>
     </div>
 
-    <!-- Card 3: Responsive Landscape -->
-    <!-- md:col-span-2: Spans 2 cols on tablets (768px+) -->
-    <!-- lg:col-span-1: Becomes vertical again on desktops (1024px+) for a clean 3-col look -->
-    <div class="group bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-2xl hover:border-primary transition-all duration-300 
-                md:col-span-2 lg:col-span-1 
-                flex flex-col md:flex-row lg:flex-col gap-8 items-center md:items-start lg:items-center">
-        
-        <div class="w-24 h-24 md:w-16 lg:w-24 md:h-16 lg:h-24 rounded-full overflow-hidden border-2 border-primary/20 flex-shrink-0">
+    <!-- Card 3: Standardized Design (Spans 2 columns on tablets) -->
+    <div class="group bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-2xl hover:border-primary transition-all duration-300 flex flex-col md:col-span-2 lg:col-span-1">
+        <div class="w-16 h-16 rounded-full overflow-hidden mb-6 border-2 border-primary/20 flex-shrink-0">
             <img src="assets/t3" alt="User" class="w-full h-full object-cover">
         </div>
-        
-        <div class="flex-grow text-center md:text-left lg:text-center">
-            <p class="text-slate-600 dark:text-slate-400 font-normal leading-relaxed mb-6 italic">"Reliability is key for our business, and this SaaS product consistently delivers. Support is also top-tier."</p>
-            <div class="border-t border-slate-100 dark:border-slate-800 pt-6">
-                <h4 class="font-semibold text-slate-900 dark:text-white">Marcus Thorne</h4>
-                <p class="text-primary text-sm font-medium">Founder, ScaleUp</p>
-            </div>
+        <p class="text-slate-600 dark:text-slate-400 font-normal leading-relaxed mb-6 italic flex-grow">"Reliability is key for our business, and this SaaS product consistently delivers. Support is also top-tier."</p>
+        <div class="border-t border-slate-100 dark:border-slate-800 pt-6 mt-auto">
+            <h4 class="font-semibold text-slate-900 dark:text-white">Marcus Thorne</h4>
+            <p class="text-primary text-sm font-medium">Founder, ScaleUp</p>
         </div>
     </div>
+
 </div>
     </div>
 </section>

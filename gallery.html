@@ -18,6 +18,14 @@
             }
         }
     </script>
+      <script>
+    // 1. Check local storage or system preference
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+</script>
     
     <style>
         [dir="rtl"] { direction: rtl; text-align: right; }
@@ -29,7 +37,6 @@
     </style>
 </head>
 <body class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300">
-
  <nav class="fixed w-full z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800 transition-colors">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-20 items-center">
@@ -64,24 +71,7 @@
         </div>
     </div>
 </div>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        // Get the current page filename (e.g., "index.html")
-        const currentPath = window.location.pathname.split("/").pop();
-        
-        // Select all links inside our nav container
-        const navLinks = document.querySelectorAll('#navLinks .nav-link');
 
-        navLinks.forEach(link => {
-            const href = link.getAttribute('href');
-            
-            // Check if the current URL matches the link's href
-            if (href === currentPath) {
-                link.classList.add('text-primary', 'font-bold');
-            }
-        });
-    });
-</script>
     <!-- Controls & CTAs -->
   <div class="flex items-center gap-3 ml-4">
     <!-- Theme Toggle (Fixed width/height) -->
@@ -156,13 +146,38 @@
         <a href="abouts.html" class="nav-link block py-2">About</a>
         <a href="services.html" class="nav-link block py-2">Services</a>
         <a href="contact.html" class="nav-link block py-2">Contact</a>
-        <a href="user.html" class="nav-link block py-2">User Profile</a>
     </div>
 
     <!-- Dashboard Button -->
-    <button id="mobDashBtn" class="w-full text-left font-bold py-2 flex justify-between items-center border-t border-slate-200 dark:border-slate-700">
-        Dashboard <span>▾</span>
+     <!-- Dropdown Wrapper -->
+<div class="relative">
+    <!-- Trigger Button -->
+    <button id="mobDashBtn" class="w-full text-left font-bold py-4 flex justify-between items-center border-t border-slate-200 dark:border-slate-700 transition-colors">
+        Dashboard <span id="arrow" class="transition-transform duration-300">▾</span>
     </button>
+
+    <!-- Dropdown Content -->
+    <div id="mobDashDropdown" class="hidden flex flex-col pb-4 space-y-2 pl-4 border-b border-slate-200 dark:border-slate-700">
+        
+       
+
+        <!-- Links -->
+        <a href="user.html" class="py-2 px-2 hover:text-primary transition-colors text-sm">User</a>
+       
+    </div>
+</div>
+
+<script>
+    const btn = document.getElementById('mobDashBtn');
+    const dropdown = document.getElementById('mobDashDropdown');
+    const arrow = document.getElementById('arrow');
+
+    btn.addEventListener('click', () => {
+        dropdown.classList.toggle('hidden');
+        arrow.style.transform = dropdown.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+    });
+</script>
+   
 
     <!-- Toggles (Aligned) -->
     <div class="flex items-center gap-3">

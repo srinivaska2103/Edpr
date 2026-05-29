@@ -9,6 +9,14 @@
     <script>
         tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#0ea5e9' } } } }
     </script>
+      <script>
+    // 1. Check local storage or system preference
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+</script>
 </head>
 <body class="bg-slate-50 dark:bg-slate-900 transition-colors duration-300 min-h-screen flex flex-col">
 
