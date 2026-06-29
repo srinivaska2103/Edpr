@@ -250,37 +250,57 @@
 </nav>
 
 <!-- Premium Hero Section -->
-<section class="pt-24 md:pt-32 pb-16 md:pb-24 px-6 bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
-    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+<section class="relative pt-32 pb-24 px-6 overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-300">
+    <!-- Subtle Background Glows -->
+    <div class="absolute top-0 right-0 -mr-20 -mt-20 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px]"></div>
+    
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative">
         
+        <!-- Text Content -->
         <div class="text-center lg:text-left space-y-8">
-            <h1 class="text-4xl md:text-6xl font-semibold text-slate-900 dark:text-white leading-[1.1] tracking-tight">
-                Professional Dent Repair Delivered to <span class="text-primary">Your Driveway</span>
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary border border-primary/20 text-sm font-semibold tracking-wide uppercase">
+                <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                Mobile Service Ready
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-white leading-[1] tracking-tight">
+                Professional Dent Repair <br class="hidden lg:block">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-sky-400">Your Driveway</span>
             </h1>
             
-            <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 font-normal max-w-xl mx-auto lg:mx-0">
-                Mobile paintless dent repair for door dings, hail damage, and minor dents without repainting your vehicle. Factory-quality results at your location.
+            <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 font-medium max-w-xl mx-auto lg:mx-0">
+                Skip the shop. We bring elite paintless dent repair to your location, fixing door dings and hail damage without a single drop of new paint.
             </p>
             
             <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center pt-4">
                 <a href="contact.html" class="w-full sm:w-auto">
-                    <button class="w-full px-8 py-4 bg-primary text-white rounded-xl font-semibold hover:bg-sky-600 shadow-lg shadow-primary/20 active:scale-95 transition-all">
+                    <button class="w-full px-8 py-4 bg-primary text-white rounded-2xl font-bold hover:shadow-2xl hover:shadow-primary/40 hover:-translate-y-1 active:scale-95 transition-all duration-300">
                         Get Instant Quote
                     </button>
                 </a>
                 <a href="booknow.html" class="w-full sm:w-auto">
-                    <button class="w-full px-8 py-4 border-2 border-primary text-primary dark:text-white dark:border-white rounded-xl font-semibold hover:bg-primary hover:text-white transition-all active:scale-95">
+                    <button class="w-full px-8 py-4 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white rounded-2xl font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all active:scale-95">
                         Book Mobile Repair
                     </button>
                 </a>
             </div>
         </div>
 
+        <!-- Visual Hero Element -->
         <div class="relative">
-            <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-slate-800">
-                <img src="assets/home2hero" alt="Professional Paintless Dent Repair" class="w-full h-auto aspect-[4/3] lg:aspect-[3/2] object-cover">
+            <!-- Main Image with "Floating" effect -->
+            <div class="relative z-10 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] transform hover:scale-[1.02] transition-transform duration-500">
+                <img src="assets/home2hero" alt="Professional Paintless Dent Repair" class="w-full h-auto aspect-[4/3] lg:aspect-[5/4] object-cover">
+                
+                <!-- Floating Badge -->
+                <div class="absolute bottom-6 left-6 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-6 py-4 rounded-2xl border border-white/20 shadow-xl">
+                    <p class="text-slate-900 dark:text-white font-bold text-lg">Lifetime Warranty</p>
+                    <p class="text-slate-500 text-xs font-semibold uppercase tracking-wider">On all repairs</p>
+                </div>
             </div>
-            <div class="absolute -z-10 -bottom-6 -right-6 w-32 h-32 bg-primary/20 rounded-full blur-3xl"></div>
+            
+            <!-- Abstract decorative shape behind image -->
+            <div class="absolute -z-10 -bottom-10 -left-10 w-72 h-72 border-2 border-primary/20 rounded-3xl rotate-12"></div>
         </div>
     </div>
 </section>
@@ -380,69 +400,51 @@
     </div>
 </section>
 <!-- Services Section -->
-<section class="py-20 bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
+<section class="py-24 bg-white dark:bg-slate-950 transition-colors duration-500">
     <div class="max-w-7xl mx-auto px-6">
         <!-- Section Header -->
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white mb-4">Our Professional Services</h2>
-            <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+        <div class="text-center mb-20">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6 tracking-tight">Our Premium Services</h2>
+            <div class="h-1.5 w-24 bg-primary mx-auto rounded-full"></div>
         </div>
 
         <!-- Services Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            <!-- Service 1: Door Ding -->
-            <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-md border border-slate-100 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all">
-                <img src="assets/Door Ding Removal1" alt="Door Ding" class="w-full h-56 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">Door Ding Removal</h3>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm font-normal">Expert removal of small dings without damaging your factory paint finish.</p>
-                </div>
+            <!-- Service 1 -->
+            <div class="group relative bg-slate-50 dark:bg-slate-900/50 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 transition-all duration-500 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10">
+                <div class="h-64 overflow-hidden"><img src="assets/Door Ding Removal1" alt="Door Ding" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"></div>
+                <div class="p-8"><h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">Door Ding Removal</h3><p class="text-slate-600 dark:text-slate-400">Expert removal of small dings without damaging your factory paint finish.</p></div>
             </div>
 
-            <!-- Service 2: Hail -->
-            <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-md border border-slate-100 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all">
-                <img src="assets/Hail Damage Repair1" alt="Hail Damage" class="w-full h-56 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">Hail Damage Repair</h3>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm font-normal">Comprehensive restoration for vehicles caught in heavy hail storms.</p>
-                </div>
+            <!-- Service 2 -->
+            <div class="group relative bg-slate-50 dark:bg-slate-900/50 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 transition-all duration-500 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10">
+                <div class="h-64 overflow-hidden"><img src="assets/Hail Damage Repair1" alt="Hail Damage" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"></div>
+                <div class="p-8"><h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">Hail Damage Repair</h3><p class="text-slate-600 dark:text-slate-400">Comprehensive restoration for vehicles caught in heavy hail storms.</p></div>
             </div>
 
-            <!-- Service 3: Crease -->
-            <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-md border border-slate-100 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all">
-                <img src="assets/Minor Crease Repair1" alt="Crease Repair" class="w-full h-56 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">Minor Crease Repair</h3>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm font-normal">Advanced techniques to lift sharp creases while keeping the metal.</p>
-                </div>
+            <!-- Service 3 -->
+            <div class="group relative bg-slate-50 dark:bg-slate-900/50 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 transition-all duration-500 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10">
+                <div class="h-64 overflow-hidden"><img src="assets/Minor Crease Repair1" alt="Crease Repair" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"></div>
+                <div class="p-8"><h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">Minor Crease Repair</h3><p class="text-slate-600 dark:text-slate-400">Advanced techniques to lift sharp creases while keeping the metal.</p></div>
             </div>
 
-            <!-- Service 4: Parking Lot -->
-            <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-md border border-slate-100 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all">
-                <img src="assets/Parking Lot Repair2" alt="Parking Lot" class="w-full h-56 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">Parking Lot Repair</h3>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm font-normal">Quick and efficient fixes for those unexpected shopping mall incidents.</p>
-                </div>
+            <!-- Service 4 -->
+            <div class="group relative bg-slate-50 dark:bg-slate-900/50 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 transition-all duration-500 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10">
+                <div class="h-64 overflow-hidden"><img src="assets/Parking Lot Repair2" alt="Parking Lot" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"></div>
+                <div class="p-8"><h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">Parking Lot Repair</h3><p class="text-slate-600 dark:text-slate-400">Quick and efficient fixes for those unexpected shopping mall incidents.</p></div>
             </div>
 
-            <!-- Service 5: Lease Return -->
-            <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-md border border-slate-100 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all">
-                <img src="assets/Lease Return Removal1" alt="Lease Return" class="w-full h-56 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">Lease Return Removal</h3>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm font-normal">Avoid hefty dealership fees by ensuring your vehicle is pristine.</p>
-                </div>
+            <!-- Service 5 -->
+            <div class="group relative bg-slate-50 dark:bg-slate-900/50 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 transition-all duration-500 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10">
+                <div class="h-64 overflow-hidden"><img src="assets/Lease Return Removal1" alt="Lease Return" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"></div>
+                <div class="p-8"><h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">Lease Return Removal</h3><p class="text-slate-600 dark:text-slate-400">Avoid hefty dealership fees by ensuring your vehicle is pristine.</p></div>
             </div>
 
-            <!-- Service 6: Fleet -->
-            <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-md border border-slate-100 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all">
-                <img src="assets/Fleet Vehicle Repair1" alt="Fleet Repair" class="w-full h-56 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">Fleet Vehicle Repair</h3>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm font-normal">Reliable PDR services for commercial fleets to maintain your brand image.</p>
-                </div>
+            <!-- Service 6 -->
+            <div class="group relative bg-slate-50 dark:bg-slate-900/50 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 transition-all duration-500 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10">
+                <div class="h-64 overflow-hidden"><img src="assets/Fleet Vehicle Repair1" alt="Fleet Repair" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"></div>
+                <div class="p-8"><h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">Fleet Vehicle Repair</h3><p class="text-slate-600 dark:text-slate-400">Reliable PDR services for commercial fleets to maintain your brand image.</p></div>
             </div>
 
         </div>
